@@ -1,4 +1,4 @@
-version: "1.1"
+version: "3.9"
 services:
 
   # watchtower - keeps other containers updated
@@ -7,14 +7,18 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /root/.docker/config.json:/config.json
     environment:
       # set timezone
       - TZ=America/Vancouver 
       # delete old containers
       - WATCHTOWER_CLEANUP=true
+      # revive containers with updates
+      - WATCHTOWER_INCLUDE_STOPPED=true
+      - WATCHTOWER_REVIVE_STOPPED=true
+      # rolling restarts are good
+      - WATCHTOWER_ROLLING_RESTART=true
       # post updates to logging channel
-      # - WATCHTOWER_NOTIFICATION_URL=discord://8l1oQjhN8I01iRl_2HrjyCoRskHabxnlb-0JNUkwvyNSVQq1mg_XUHv3dvI48RKmKU5d@1089524517916901516
+      - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_LOG_CHANNEL}
       
       # Use HTTP request to check for an image update
       # curl -H "Authorization: Bearer TOKEN" localhost:8080/v1/update
@@ -35,3 +39,5 @@ services:
     environment:
       - DISCORD_TOKEN
       - WATCHTOWER_TOKEN
+    links:
+     - watchtower
