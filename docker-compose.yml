@@ -35,7 +35,7 @@ services:
 
   # runs our discord bot peregrine
   discord:
-    image: "ghcr.io/langaracpsc/peregrine:main"
+    build: https://github.com/langaracpsc/peregrine.git
     environment:
       - DISCORD_TOKEN
       - WATCHTOWER_TOKEN
