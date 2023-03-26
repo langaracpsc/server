@@ -25,7 +25,8 @@ services:
       - WATCHTOWER_HTTP_API_UPDATE=true
       # Set token for HTTP request from .env
       - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_TOKEN}
-      # Also continue checking for updates automatically (default is daily)
+      # Also continue checking for updates automatically (every hour)
+      - WATCHTOWER_POLL_INTERVAL=3600
       - WATCHTOWER_HTTP_API_PERIODIC_POLLS=true
 
     # port for http request  
@@ -35,7 +36,7 @@ services:
 
   # runs our discord bot peregrine
   discord:
-    build: https://github.com/langaracpsc/peregrine.git
+    image: "ghcr.io/langaracpsc/peregrine:latest"
     environment:
       - DISCORD_TOKEN
       - WATCHTOWER_TOKEN
