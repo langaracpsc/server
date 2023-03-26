@@ -1,0 +1,7 @@
+version: "1.0"
+services:
+  discord:
+    build: discord/.
+    environment:
+      - DISCORD_TOKEN
+  # add other docker images here once they exist
