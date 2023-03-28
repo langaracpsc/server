@@ -15,11 +15,11 @@ Current containers:
 
 To run on your local cloud machine: 
 - Install Docker
-- Clone this repository (`git clone https://github.com/langaracpsc/server `)
-- Populate `.env`
+- Clone this repository with `git clone https://github.com/langaracpsc/server`
+- Enter the new directory with `cd server`
+- Populate `.env` (i recommend `nano .env` but feel free to use a text editor of your choice)
 - Run with `docker compose up -d`
 - Follow the logs with `docker compose logs -f` 
 - When adding a new container, use `docker compose stop` then `docker compose rm` to delete the application.
 
-
-- To update these files run `rm ./*` then `git clone https://github.com/langaracpsc/server .`
+- To update from the github repository, run `git pull`
