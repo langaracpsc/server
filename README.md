@@ -20,6 +20,5 @@ To run on your local cloud machine:
 - Populate `.env` (i recommend `nano .env` but feel free to use a text editor of your choice)
 - Run with `docker compose up -d`
 - Follow the logs with `docker compose logs -f` 
-- When adding a new container, use `docker compose stop` then `docker compose rm` to delete the application.
 
-- To update from the github repository, run `git pull`
+- To update from the github repository, use `git pull` then `docker compose stop` and `docker compose rm`, then `docker compose up -d`
