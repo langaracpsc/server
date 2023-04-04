@@ -41,3 +41,8 @@ services:
     # connect to watchtower container to send restart command
     links: 
      - watchtower
+     
+   api:
+    image: "ghcr.io/highfire1/langara-course-api:latest"
+    ports:
+      - "5000:5000"
