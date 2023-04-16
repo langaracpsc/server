@@ -3,6 +3,7 @@ services:
 
   # watchtower - keeps other containers updated
   watchtower:
+    network_mode: host 
     image: containrrr/watchtower
     restart: always
     volumes:
@@ -27,22 +28,14 @@ services:
       - WATCHTOWER_POLL_INTERVAL=3600
       - WATCHTOWER_HTTP_API_PERIODIC_POLLS=true
 
-    # port for http request  
-    ports:
-      - 8080:8080
-
-
   # runs our discord bot peregrine
   discord:
+    network_mode: host 
     image: "ghcr.io/langaracpsc/peregrine:latest"
     environment:
       - DISCORD_BOT_TOKEN
       - WATCHTOWER_HTTP_API_TOKEN
-    # connect to watchtower container to send restart command
-    links: 
-     - watchtower
      
-  #api:
-  #  image: "ghcr.io/highfire1/langara-course-api:latest"
-  #  ports:
-  #    - "5000:5000"
+  api:
+    network_mode: host 
+    image: "ghcr.io/highfire1/langara-course-api:latest"
