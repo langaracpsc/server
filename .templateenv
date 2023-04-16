@@ -1,3 +1,5 @@
+# RENAME THIS FILE TO .ENV
+
 # Discord bot token for peregrine
 # Get from the Discord Developer portal
 DISCORD_BOT_TOKEN=token
