@@ -42,7 +42,7 @@ services:
     links: 
      - watchtower
      
-  api:
-    image: "ghcr.io/highfire1/langara-course-api:latest"
-    ports:
-      - "5000:5000"
+  #api:
+  #  image: "ghcr.io/highfire1/langara-course-api:latest"
+  #  ports:
+  #    - "5000:5000"
