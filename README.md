@@ -22,3 +22,5 @@ To run on your local cloud machine:
 - Follow the logs with `docker compose logs -f` 
 
 - To update from the github repository, use `git pull` then `docker compose stop` and `docker compose rm`, then `docker compose up -d`
+
+- Use `docker-compose down -v --rmi all --remove-orphans` to clear the docker compose cache (we need to move to podman)
