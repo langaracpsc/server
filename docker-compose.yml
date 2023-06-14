@@ -1,11 +1,21 @@
 version: "3.9"
 services:
 
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - 9443:9443
+    volumes:
+      - portainer_data:/portainer_data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
   # watchtower - keeps other containers updated
   watchtower:
-    network_mode: host 
+    ports:
+      - '8080:8080'
     image: containrrr/watchtower
-    restart: always
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
@@ -32,10 +42,16 @@ services:
   discord:
     network_mode: host 
     image: "ghcr.io/langaracpsc/peregrine:latest"
+    restart: unless-stopped
     environment:
       - DISCORD_BOT_TOKEN
       - WATCHTOWER_HTTP_API_TOKEN
      
   api:
-    network_mode: host 
+    ports:
+        - '5000:5000'
     image: "ghcr.io/highfire1/langara-course-api:latest"
+    restart: unless-stopped
+
+volumes:
+    portainer_data:
