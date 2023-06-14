@@ -3,10 +3,11 @@ Backup / Setup files for LCSC Server
 
 We use docker to to run all applications on our server.
 
-Containers are kept up to date with [Watchtower](https://containrrr.dev/watchtower/).
+Containers are kept up to date with [Watchtower](https://containrrr.dev/watchtower/) and maintained with [Portainer](https://168.138.79.49:9443).
 
 Current containers:
 - [peregrine](https://github.com/langaracpsc/peregrine)
+- [langara api](https://github.com/Highfire1/langara-course-api)
 
 
 <br>
