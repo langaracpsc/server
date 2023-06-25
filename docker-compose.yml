@@ -39,18 +39,26 @@ services:
       - WATCHTOWER_HTTP_API_PERIODIC_POLLS=true
 
   # runs our discord bot peregrine
-  discord:
+  peregrine:
     network_mode: host 
     image: "ghcr.io/langaracpsc/peregrine:latest"
     restart: unless-stopped
     environment:
       - DISCORD_BOT_TOKEN
       - WATCHTOWER_HTTP_API_TOKEN
-     
-  api:
+
+  # an api for langara courses
+  langara-api:
     ports:
-        - '5000:5000'
+      - '5000:5000'
     image: "ghcr.io/highfire1/langara-course-api:latest"
+    restart: unless-stopped
+  
+  # our new website!
+  langaracpsc-next:
+    ports:
+      - '3000:3000'
+    image: "ghcr.io/langaracpsc/langaracpsc-next:latest"
     restart: unless-stopped
 
 volumes:
