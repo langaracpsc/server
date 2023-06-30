@@ -1,7 +1,8 @@
 # server
 Backup / Setup files for LCSC Server
 
-We use docker to to run all applications on our server.
+We use docker to to run all applications on our server. 
+Applications are then reverse proxied through nginx to (langaracs.tech)[langaracs.tech]!
 
 Containers are kept up to date with [Watchtower](https://containrrr.dev/watchtower/) and maintained with [Portainer](https://168.138.79.49:9443).
 
