@@ -72,6 +72,8 @@ services:
     image: "ghcr.io/highfire1/langara-course-api:latest"
     restart: unless-stopped
     environment:
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      
       - VIRTUAL_HOST=api.langaracs.tech
       - VIRTUAL_PATH=/
       - LETSENCRYPT_HOST=api.langaracs.tech

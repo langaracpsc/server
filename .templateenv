@@ -9,3 +9,6 @@ WATCHTOWER_HTTP_API_TOKEN=token
 # logging channels for Watchtower
 # see https://containrrr.dev/shoutrrr/v0.6/services/overview/ for format
 WATCHTOWER_LOG_CHANNEL=discord://token@id
+
+# webhook for notifications about new sections
+DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/YOUR_WEBHOOK_HERE"
