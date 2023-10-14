@@ -65,7 +65,7 @@ services:
       - WATCHTOWER_HTTP_API_TOKEN
 
 
-  # an api for langara courses
+  # Langara Course API from Anderson
   langara-api:
     ports:
       - '5000:5000'
@@ -80,8 +80,7 @@ services:
       - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
     network_mode: bridge
 
-
-  # our new website!
+  # Website
   langaracpsc-next:
     ports:
       - '3000:3000'
@@ -94,8 +93,7 @@ services:
       - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
     network_mode: bridge
 
-
-
+  # Nginx
   nginx-proxy:
     image: nginx:alpine
     container_name: nginx-proxy
@@ -109,6 +107,7 @@ services:
       - certs:/etc/nginx/certs:ro
     network_mode: bridge
 
+  # Generates reverse proxy templates of each service for nginx
   docker-gen:
     image: nginxproxy/docker-gen
     container_name: docker-gen
@@ -122,6 +121,7 @@ services:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen
     network_mode: bridge
 
+  # creates Let's Encrypt certificates
   acme-companion:
     image: nginxproxy/acme-companion
     container_name: nginx-proxy-acme
