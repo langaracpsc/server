@@ -59,7 +59,6 @@ services:
   peregrine:
     network_mode: host 
     image: "ghcr.io/langaracpsc/peregrine:latest"
-    restart: unless-stopped
     environment:
       - DISCORD_BOT_TOKEN
       - WATCHTOWER_HTTP_API_TOKEN
@@ -69,7 +68,6 @@ services:
     ports:
       - '3000:3000'
     image: "ghcr.io/langaracpsc/langaracpsc-next:latest"
-    restart: unless-stopped
     network_mode: bridge
     environment:
       - VIRTUAL_HOST=langaracs.tech
@@ -98,7 +96,6 @@ services:
     image: postgres:latest
     ports:
       - "5432:5432"
-    restart: always
     volumes:
       - ./data/db:/var/lib/postgres/data
     networks:
@@ -112,7 +109,6 @@ services:
     ports:
       - '5000:5000'
     image: "ghcr.io/highfire1/langara-course-api:latest"
-    restart: unless-stopped
     network_mode: bridge
     environment:
       - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
