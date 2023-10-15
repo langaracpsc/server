@@ -1,4 +1,7 @@
-version: '2'
+version: '3.4'
+
+networks:
+  langaracpsc-dev:
 
 services:
 
@@ -11,7 +14,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     environment:
-
     # nginx values
       - VIRTUAL_HOST=langaracs.tech
       - VIRTUAL_PATH=/portainer
@@ -159,9 +161,6 @@ services:
       - acme:/etc/acme.sh
       - /var/run/docker.sock:/var/run/docker.sock:ro
     network_mode: bridge
-
-networks:
-  langaracpsc-dev:
 
 volumes:
   portainer_data:
