@@ -21,12 +21,13 @@ services:
 
   # watchtower - keeps other containers updated
   watchtower:
+    image: containrrr/watchtower
     ports:
       - '8080:8080'
-    image: containrrr/watchtower
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    network_mode: bridge
     environment:
       # set timezone
       - TZ=America/Vancouver 
@@ -52,7 +53,6 @@ services:
       - VIRTUAL_PATH=/watchtower
       - LETSENCRYPT_HOST=langaracs.tech
       - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
-    network_mode: bridge
 
 
   # runs our discord bot peregrine
@@ -70,12 +70,12 @@ services:
       - '3000:3000'
     image: "ghcr.io/langaracpsc/langaracpsc-next:latest"
     restart: unless-stopped
+    network_mode: bridge
     environment:
       - VIRTUAL_HOST=langaracs.tech
       - VIRTUAL_PATH=/
       - LETSENCRYPT_HOST=langaracs.tech
       - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
-    network_mode: bridge
 
   # LCSC Website API
   langaracpsc.webapi:
@@ -89,7 +89,7 @@ services:
     network_mode: bridge
     environment:      
       - VIRTUAL_HOST=api.langaracs.tech
-      - VIRTUAL_PATH=/courses/
+      - VIRTUAL_PATH=/
       - LETSENCRYPT_HOST=api.langaracs.tech
       - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
 
@@ -101,11 +101,11 @@ services:
     restart: always
     volumes:
       - ./data/db:/var/lib/postgres/data
+    networks:
+      - database
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    networks:
-      - database
 
   # Langara Course API from Anderson
   langara-api:
@@ -113,6 +113,7 @@ services:
       - '5000:5000'
     image: "ghcr.io/highfire1/langara-course-api:latest"
     restart: unless-stopped
+    network_mode: bridge
     environment:
       - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
       
@@ -120,7 +121,6 @@ services:
       - VIRTUAL_PATH=/
       - LETSENCRYPT_HOST=api2.langaracs.tech
       - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
-    network_mode: bridge
       
 
   # Nginx

@@ -12,3 +12,7 @@ WATCHTOWER_LOG_CHANNEL=discord://token@id
 
 # webhook for notifications about new sections
 DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/YOUR_WEBHOOK_HERE"
+
+# Postgres
+POSTGRES_USER="user"
+POSTGRES_PASSWORD="password"
