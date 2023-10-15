@@ -64,22 +64,6 @@ services:
       - DISCORD_BOT_TOKEN
       - WATCHTOWER_HTTP_API_TOKEN
 
-
-  # Langara Course API from Anderson
-  langara-api:
-    ports:
-      - '5000:5000'
-    image: "ghcr.io/highfire1/langara-course-api:latest"
-    restart: unless-stopped
-    environment:
-      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
-      
-      - VIRTUAL_HOST=api.langaracs.tech
-      - VIRTUAL_PATH=/
-      - LETSENCRYPT_HOST=api.langaracs.tech
-      - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
-    network_mode: bridge
-
   # Website
   langaracpsc-next:
     ports:
@@ -92,6 +76,52 @@ services:
       - LETSENCRYPT_HOST=langaracs.tech
       - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
     network_mode: bridge
+
+  # LCSC Website API
+  langaracpsc.webapi:
+    image: "ghcr.io/langaracpsc/langaracpsc.webapi:latest"
+    depends_on:
+      - "webapi_postgres"
+    ports:
+      - "8000:80"     
+    networks:
+      - database
+    network_mode: bridge
+    environment:      
+      - VIRTUAL_HOST=api.langaracs.tech
+      - VIRTUAL_PATH=/courses/
+      - LETSENCRYPT_HOST=api.langaracs.tech
+      - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
+
+  # Postgres database for langaracpsc.webapi
+  webapi_postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/postgres/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - database
+
+  # Langara Course API from Anderson
+  langara-api:
+    ports:
+      - '5000:5000'
+    image: "ghcr.io/highfire1/langara-course-api:latest"
+    restart: unless-stopped
+    environment:
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      
+      - VIRTUAL_HOST=api2.langaracs.tech
+      - VIRTUAL_PATH=/
+      - LETSENCRYPT_HOST=api2.langaracs.tech
+      - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
+    network_mode: bridge
+      
 
   # Nginx
   nginx-proxy:
@@ -135,6 +165,9 @@ services:
       - acme:/etc/acme.sh
       - /var/run/docker.sock:/var/run/docker.sock:ro
     network_mode: bridge
+
+networks:
+  database:
 
 volumes:
   portainer_data:
