@@ -92,7 +92,13 @@ services:
       - "8000:80"     
     networks:
       - backend
-    environment:      
+    environment:     
+      - HOSTNAME=${PG_HOSTNAME}
+      - DATABASE=${PG_DATABASE}
+      - USERNAME=${PG_USERNAME}
+      - PASSWORD=${PG_PASSWORD}
+      - PORT=${PG_PORT} 
+
       - VIRTUAL_HOST=api.langaracs.tech
       - VIRTUAL_PATH=/
       - LETSENCRYPT_HOST=api.langaracs.tech
@@ -107,7 +113,8 @@ services:
     volumes:
       - ./data/db:/var/lib/postgres/data
     environment:
-      - POSTGRES_USER=${POSTGRES_USER}
+      environment:
+      - POSTGRES_USER=${PG_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
   # Langara Course API from Anderson
