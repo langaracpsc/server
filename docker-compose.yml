@@ -83,7 +83,7 @@ services:
     ports:
       - "8000:80"     
     networks:
-      - database
+      - langaracpsc-dev  
     environment:      
       - VIRTUAL_HOST=api.langaracs.tech
       - VIRTUAL_PATH=/
@@ -95,7 +95,7 @@ services:
     image: postgres:latest
     restart: always
     networks:
-      - database
+      - langaracpsc-dev  
     volumes:
       - ./data/db:/var/lib/postgres/data
     environment:
@@ -161,7 +161,7 @@ services:
     network_mode: bridge
 
 networks:
-  database:
+  langaracpsc-dev:
 
 volumes:
   portainer_data:
