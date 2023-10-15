@@ -7,6 +7,7 @@ networks:
 services:
 
   portainer:
+    container_name: portainer
     image: portainer/portainer-ce:latest
     ports:
       - 9443:9443
@@ -25,6 +26,7 @@ services:
 
   # watchtower - keeps other containers updated
   watchtower:
+    container_name: watchtower
     image: containrrr/watchtower
     ports:
       - '8080:8080'
@@ -62,6 +64,7 @@ services:
 
   # runs our discord bot peregrine
   peregrine:
+    container_name: peregrine
     network_mode: host 
     image: "ghcr.io/langaracpsc/peregrine:latest"
     networks:
@@ -72,6 +75,7 @@ services:
 
   # Website
   langaracpsc-next:
+    container_name: website
     ports:
       - '3000:3000'
     image: "ghcr.io/langaracpsc/langaracpsc-next:latest"
@@ -85,6 +89,7 @@ services:
 
   # LCSC Website API
   langaracpsc.webapi:
+    container_name: webapi
     image: "ghcr.io/langaracpsc/langaracpsc.webapi:latest"
     depends_on:
       - "postgres_image"
@@ -106,6 +111,7 @@ services:
 
   # Postgres database for langaracpsc.webapi
   postgres_image:
+    container_name: postgres
     image: postgres:latest
     restart: always
     networks:
@@ -118,6 +124,7 @@ services:
 
   # Langara Course API from Anderson
   langara-api:
+    container_name: langaraapi
     ports:
       - '5000:5000'
     image: "ghcr.io/highfire1/langara-course-api:latest"
@@ -134,6 +141,7 @@ services:
 
   # Nginx
   nginx-proxy:
+    container_name: nginx-proxy
     image: nginx:alpine
     container_name: nginx-proxy
     ports:
@@ -150,6 +158,7 @@ services:
 
   # Generates reverse proxy templates of each service for nginx
   docker-gen:
+    container_name: docker-gen
     image: nginxproxy/docker-gen
     container_name: docker-gen
     command: -notify-sighup nginx-proxy -watch /etc/docker-proxy-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
@@ -165,6 +174,7 @@ services:
 
   # creates Let's Encrypt certificates
   acme-companion:
+    container_name: acme-companion
     image: nginxproxy/acme-companion
     container_name: nginx-proxy-acme
     environment:
