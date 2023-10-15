@@ -79,10 +79,11 @@ services:
   langaracpsc.webapi:
     image: "ghcr.io/langaracpsc/langaracpsc.webapi:latest"
     depends_on:
-      - "webapi_postgres"
+      - "postgres_image"
     ports:
       - "8000:80"     
-    network_mode: bridge
+    networks:
+      - database
     environment:      
       - VIRTUAL_HOST=api.langaracs.tech
       - VIRTUAL_PATH=/
@@ -90,13 +91,13 @@ services:
       - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
 
   # Postgres database for langaracpsc.webapi
-  webapi_postgres:
+  postgres_image:
     image: postgres:latest
-    ports:
-      - "5432:5432"
+    restart: always
+    networks:
+      - database
     volumes:
       - ./data/db:/var/lib/postgres/data
-    network_mode: bridge
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
