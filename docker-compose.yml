@@ -1,7 +1,8 @@
 version: '3.4'
 
 networks:
-  langaracpsc-dev:
+  backend:
+    driver: bridge
 
 services:
 
@@ -13,13 +14,14 @@ services:
       - portainer_data:/portainer_data
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    networks:
+      - backend
     environment:
     # nginx values
       - VIRTUAL_HOST=langaracs.tech
       - VIRTUAL_PATH=/portainer
       - LETSENCRYPT_HOST=langaracs.tech
       - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
-    network_mode: bridge
 
   # watchtower - keeps other containers updated
   watchtower:
@@ -29,7 +31,8 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    network_mode: bridge
+    networks:
+      - backend
     environment:
       # set timezone
       - TZ=America/Vancouver 
@@ -61,6 +64,8 @@ services:
   peregrine:
     network_mode: host 
     image: "ghcr.io/langaracpsc/peregrine:latest"
+    networks:
+      - backend
     environment:
       - DISCORD_BOT_TOKEN
       - WATCHTOWER_HTTP_API_TOKEN
@@ -70,7 +75,8 @@ services:
     ports:
       - '3000:3000'
     image: "ghcr.io/langaracpsc/langaracpsc-next:latest"
-    network_mode: bridge
+    networks:
+      - backend
     environment:
       - VIRTUAL_HOST=langaracs.tech
       - VIRTUAL_PATH=/
@@ -85,7 +91,7 @@ services:
     ports:
       - "8000:80"     
     networks:
-      - langaracpsc-dev  
+      - backend
     environment:      
       - VIRTUAL_HOST=api.langaracs.tech
       - VIRTUAL_PATH=/
@@ -97,7 +103,7 @@ services:
     image: postgres:latest
     restart: always
     networks:
-      - langaracpsc-dev  
+      - backend
     volumes:
       - ./data/db:/var/lib/postgres/data
     environment:
@@ -109,7 +115,8 @@ services:
     ports:
       - '5000:5000'
     image: "ghcr.io/highfire1/langara-course-api:latest"
-    network_mode: bridge
+    networks:
+      - backend
     environment:
       - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
       
@@ -132,7 +139,7 @@ services:
       - html:/usr/share/nginx/html
       - certs:/etc/nginx/certs:ro
     networks:
-      - langaracpsc-dev
+      - backend
     network_mode: bridge
 
   # Generates reverse proxy templates of each service for nginx
@@ -147,7 +154,8 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen
-    network_mode: bridge
+    networks:
+      - backend
 
   # creates Let's Encrypt certificates
   acme-companion:
@@ -162,7 +170,8 @@ services:
       - certs:/etc/nginx/certs:rw
       - acme:/etc/acme.sh
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    network_mode: bridge
+    networks:
+      - backend
 
 volumes:
   portainer_data:
