@@ -4,7 +4,7 @@ if [ ! -f ".env" ]; then
     exit
 fi
 
-
+docker compose pull
 docker compose up -d
 docker compose logs -f
 # docker compose stop
