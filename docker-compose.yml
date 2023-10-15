@@ -2,6 +2,7 @@ version: '3.4'
 
 networks:
   langaracpsc-dev:
+   - network_mode: bridge
 
 services:
 
