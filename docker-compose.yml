@@ -64,7 +64,6 @@ services:
   # runs our discord bot peregrine
   peregrine:
     container_name: peregrine
-    network_mode: host 
     image: "ghcr.io/langaracpsc/peregrine:latest"
     networks:
       - backend
