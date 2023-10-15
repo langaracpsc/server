@@ -10,7 +10,7 @@ services:
     container_name: portainer
     image: portainer/portainer-ce:latest
     ports:
-      - 9443:9443
+      - 9443:80
     volumes:
       - portainer_data:/portainer_data
       - /var/run/docker.sock:/var/run/docker.sock
@@ -18,7 +18,6 @@ services:
     networks:
       - backend
     environment:
-    # nginx values
       - VIRTUAL_HOST=langaracs.tech
       - VIRTUAL_PATH=/portainer
       - LETSENCRYPT_HOST=langaracs.tech
