@@ -84,8 +84,7 @@ services:
       - "postgres_image"
     ports:
       - "8000:80"     
-    networks:
-      - langaracpsc-dev  
+    network_mode: bridge
     environment:      
       - VIRTUAL_HOST=api.langaracs.tech
       - VIRTUAL_PATH=/
@@ -96,8 +95,7 @@ services:
   postgres_image:
     image: postgres:latest
     restart: always
-    networks:
-      - langaracpsc-dev  
+    network_mode: bridge
     volumes:
       - ./data/db:/var/lib/postgres/data
     environment:
@@ -131,8 +129,6 @@ services:
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - certs:/etc/nginx/certs:ro
-    networks:
-      - langaracpsc-dev
     network_mode: bridge
 
   # Generates reverse proxy templates of each service for nginx
