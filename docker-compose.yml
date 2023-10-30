@@ -10,7 +10,7 @@ services:
     container_name: portainer
     image: portainer/portainer-ce:latest
     ports:
-      - 9443:80
+      - 9000:80
     volumes:
       - portainer_data:/portainer_data
       - /var/run/docker.sock:/var/run/docker.sock
@@ -125,16 +125,16 @@ services:
     container_name: langaraapi
     ports:
       - '5000:5000'
-    image: "ghcr.io/highfire1/langara-course-api:latest"
+    image: "ghcr.io/highfire1/langaracoursewatcher:latest"
     networks:
       - backend
     environment:
-      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
+      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
       
-      - VIRTUAL_HOST=api2.langaracs.tech
-      - VIRTUAL_PATH=/
-      - LETSENCRYPT_HOST=api2.langaracs.tech
-      - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
+      VIRTUAL_HOST: api2.langaracs.tech
+      VIRTUAL_PATH: /
+      LETSENCRYPT_HOST: api2.langaracs.tech
+      LETSENCRYPT_EMAIL: langaracompsciclub@gmail.com
       
 
   # Nginx
@@ -149,6 +149,7 @@ services:
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - certs:/etc/nginx/certs:ro
+      - ./custom.conf:/etc/nginx/conf.d/custom.conf
     networks:
       - backend
     network_mode: bridge
