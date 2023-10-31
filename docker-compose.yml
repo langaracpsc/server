@@ -128,6 +128,8 @@ services:
     image: "ghcr.io/highfire1/langaracoursewatcher:latest"
     networks:
       - backend
+    volumes:
+      - course_watcher_db:/database
     environment:
       DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
       
@@ -187,6 +189,7 @@ services:
       - backend
 
 volumes:
+  course_watcher_db:
   portainer_data:
   conf:
   vhost:
