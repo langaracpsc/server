@@ -10,7 +10,7 @@ services:
     container_name: portainer
     image: portainer/portainer-ce:latest
     ports:
-      - 9000:80
+      - 8000:8000
     volumes:
       - portainer_data:/portainer_data
       - /var/run/docker.sock:/var/run/docker.sock
@@ -18,9 +18,10 @@ services:
     networks:
       - backend
     environment:
-      - VIRTUAL_HOST=langaracs.tech
-      - VIRTUAL_PATH=/portainer
-      - LETSENCRYPT_HOST=langaracs.tech
+      - VIRTUAL_HOST=portainer.langaracs.tech
+      #- VIRTUAL_PATH=/portainer
+      - VIRTUAL_PORT=9000
+      - LETSENCRYPT_HOST=portainer.langaracs.tech
       - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
 
   # watchtower - keeps other containers updated
