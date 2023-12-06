@@ -10,7 +10,7 @@ services:
     container_name: portainer
     image: portainer/portainer-ce:latest
     ports:
-      - 8000:8000
+      - 5001:5001
     volumes:
       - portainer_data:/portainer_data
       - /var/run/docker.sock:/var/run/docker.sock
@@ -77,7 +77,7 @@ services:
     container_name: website
     ports:
       - '3000:3000'
-    image: "ghcr.io/langaracpsc/langaracpsc-next:latest"
+    image: "3278a8d0efba"
     networks:
       - backend
     environment:
@@ -85,6 +85,8 @@ services:
       - VIRTUAL_PATH=/
       - LETSENCRYPT_HOST=langaracs.tech
       - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
 
   # LCSC Website API
   langaracpsc.webapi:
@@ -133,7 +135,7 @@ services:
       - course_watcher_db:/database
     environment:
       DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
-      
+      PYTHONUNBUFFERED: 1
       VIRTUAL_HOST: api2.langaracs.tech
       VIRTUAL_PATH: /
       LETSENCRYPT_HOST: api2.langaracs.tech
