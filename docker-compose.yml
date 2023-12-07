@@ -39,7 +39,7 @@ services:
       - WATCHTOWER_REVIVE_STOPPED=true
       # post updates to logging channel
       - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_LOG_CHANNEL}
-      
+
       # Use HTTP request to check for an image update
       # curl -H "Authorization: Bearer token" localhost:8080/v1/update
       - WATCHTOWER_HTTP_API_UPDATE=true
@@ -48,12 +48,6 @@ services:
       # Also continue checking for updates automatically (every hour)
       - WATCHTOWER_POLL_INTERVAL=3600
       - WATCHTOWER_HTTP_API_PERIODIC_POLLS=true
-
-      # nginx values
-      - VIRTUAL_HOST=langaracs.tech
-      - VIRTUAL_PATH=/watchtower
-      - LETSENCRYPT_HOST=langaracs.tech
-      - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
 
 
   # runs our discord bot peregrine
@@ -74,11 +68,6 @@ services:
     image: "3278a8d0efba"
     networks:
       - backend
-    environment:
-      - VIRTUAL_HOST=langaracs.tech
-      - VIRTUAL_PATH=/
-      - LETSENCRYPT_HOST=langaracs.tech
-      - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
 
@@ -89,20 +78,16 @@ services:
     depends_on:
       - "postgres_image"
     ports:
-      - "8000:80"     
+      - "8000:80"
     networks:
       - backend
-    environment:     
+    environment
       - HOSTNAME=${PG_HOSTNAME}
       - DATABASE=${PG_DATABASE}
       - USERNAME=${PG_USERNAME}
       - PASSWORD=${PG_PASSWORD}
-      - PORT=${PG_PORT} 
+      - PORT=${PG_PORT}
 
-      - VIRTUAL_HOST=api.langaracs.tech
-      - VIRTUAL_PATH=/
-      - LETSENCRYPT_HOST=api.langaracs.tech
-      - LETSENCRYPT_EMAIL=langaracompsciclub@gmail.com
 
   # Postgres database for langaracpsc.webapi
   postgres_image:
@@ -130,10 +115,6 @@ services:
     environment:
       DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
       PYTHONUNBUFFERED: 1
-      VIRTUAL_HOST: api2.langaracs.tech
-      VIRTUAL_PATH: /
-      LETSENCRYPT_HOST: api2.langaracs.tech
-      LETSENCRYPT_EMAIL: langaracompsciclub@gmail.com
 
   nginx-proxy-manager:
     container_name: nginx_manager
@@ -145,7 +126,7 @@ services:
       - '443:443'
     volumes:
       - nginxpm_data:/data
-      - letsencrypt:/etc/letsencrypt    
+      - letsencrypt:/etc/letsencrypt
 
 volumes:
   postgres_db:
