@@ -1,11 +1,97 @@
 version: '3.4'
 
-networks:
-  backend:
-    driver: bridge
-
 services:
 
+  # Peregrine, our discord bot
+  peregrine:
+    container_name: peregrine
+    image: "ghcr.io/langaracpsc/peregrine:latest"
+    networks:
+      - backend
+    environment:
+      - DISCORD_BOT_TOKEN
+      - WATCHTOWER_HTTP_API_TOKEN
+
+
+
+  # Website
+  langaracpsc-next:
+    container_name: website
+    ports:
+      - '3000:3000'
+    image: "3278a8d0efba" # THIS IS TEMPORARY
+    networks:
+      - backend
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false" # disable watchtower on this container
+
+
+  # Website API
+  langaracpsc.webapi:
+    container_name: webapi
+    image: "ghcr.io/langaracpsc/langaracpsc.webapi:latest"
+    depends_on:
+      - "postgres_image"
+    ports:
+      - "8000:80"
+    networks:
+      - backend
+    environment:
+      - HOSTNAME=${PG_HOSTNAME}
+      - DATABASE=${PG_DATABASE}
+      - USERNAME=${PG_USERNAME}
+      - PASSWORD=${PG_PASSWORD}
+      - PORT=${PG_PORT}
+
+
+  # Postgres database that backs langaracpsc.webapi
+  postgres_image:
+    container_name: postgres
+    image: postgres:latest
+    restart: always
+    networks:
+      - backend
+    volumes:
+      - postgres_db:/var/lib/postgres/data
+    environment:
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_USER=${PG_USERNAME}
+
+
+
+  # Langara Course API from Anderson
+  langara-api:
+    container_name: langaraapi
+    ports:
+      - '5000:5000'
+    image: "ghcr.io/highfire1/langaracoursewatcher:latest"
+    networks:
+      - backend
+    volumes:
+      - course_watcher_db:/database
+    environment:
+      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
+
+
+  # === SYSADMIN TOOLS === #
+
+
+  # NGINX manager
+  nginx-proxy-manager:
+    container_name: nginx_manager
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - nginxpm_data:/data
+      - nginxpm_letsencrypt:/etc/letsencrypt
+
+
+
+  # Docker container manager
   portainer:
     container_name: portainer
     image: portainer/portainer-ce:latest
@@ -15,10 +101,10 @@ services:
       - portainer_data:/portainer_data
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
-    networks:
-      - backend
 
-  # watchtower - keeps other containers updated
+
+
+  # Watchtower keeps images up to date
   watchtower:
     container_name: watchtower
     image: containrrr/watchtower
@@ -50,93 +136,17 @@ services:
       - WATCHTOWER_HTTP_API_PERIODIC_POLLS=true
 
 
-  # runs our discord bot peregrine
-  peregrine:
-    container_name: peregrine
-    image: "ghcr.io/langaracpsc/peregrine:latest"
-    networks:
-      - backend
-    environment:
-      - DISCORD_BOT_TOKEN
-      - WATCHTOWER_HTTP_API_TOKEN
+networks:
+  backend:
+    driver: bridge
 
-  # Website
-  langaracpsc-next:
-    container_name: website
-    ports:
-      - '3000:3000'
-    image: "3278a8d0efba"
-    networks:
-      - backend
-    labels:
-      - "com.centurylinklabs.watchtower.enable=false"
-
-  # LCSC Website API
-  langaracpsc.webapi:
-    container_name: webapi
-    image: "ghcr.io/langaracpsc/langaracpsc.webapi:latest"
-    depends_on:
-      - "postgres_image"
-    ports:
-      - "8000:80"
-    networks:
-      - backend
-    environment
-      - HOSTNAME=${PG_HOSTNAME}
-      - DATABASE=${PG_DATABASE}
-      - USERNAME=${PG_USERNAME}
-      - PASSWORD=${PG_PASSWORD}
-      - PORT=${PG_PORT}
-
-
-  # Postgres database for langaracpsc.webapi
-  postgres_image:
-    container_name: postgres
-    image: postgres:latest
-    restart: always
-    networks:
-      - backend
-    volumes:
-      - postgres_db:/var/lib/postgres/data
-    environment:
-      - POSTGRES_PASSWORD=${PG_PASSWORD}
-      - POSTGRES_USER=${PG_USERNAME}
-
-  # Langara Course API from Anderson
-  langara-api:
-    container_name: langaraapi
-    ports:
-      - '5000:5000'
-    image: "ghcr.io/highfire1/langaracoursewatcher:latest"
-    networks:
-      - backend
-    volumes:
-      - course_watcher_db:/database
-    environment:
-      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
-      PYTHONUNBUFFERED: 1
-
-  nginx-proxy-manager:
-    container_name: nginx_manager
-    image: 'jc21/nginx-proxy-manager:latest'
-    restart: unless-stopped
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
-    volumes:
-      - nginxpm_data:/data
-      - letsencrypt:/etc/letsencrypt
 
 volumes:
   postgres_db:
-    driver_opts:
-      type: none
-      device: ${PWD}/data/db
-      o: bind
 
   course_watcher_db:
+
   portainer_data:
 
   nginxpm_data:
-  letsencrypt:
+  nginxpm_letsencrypt:
