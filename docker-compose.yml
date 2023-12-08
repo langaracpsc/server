@@ -78,7 +78,7 @@ services:
 
   # NGINX manager
   nginx-proxy-manager:
-    container_name: nginx_manager
+    container_name: nginx-proxy-manager
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
     ports:
@@ -88,17 +88,19 @@ services:
     volumes:
       - nginxpm_data:/data
       - nginxpm_letsencrypt:/etc/letsencrypt
+    networks:
+      - backend
 
 
 
-  # Docker container manager
+  # Portainer, docker container manager
   portainer:
     container_name: portainer
     image: portainer/portainer-ce:latest
     ports:
       - 9443:9443
     volumes:
-      - portainer_data:/portainer_data
+      - portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
 
