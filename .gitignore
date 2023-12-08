@@ -1,1 +1,5 @@
 *.env
+
+
+rish_this_is_prod/
+data/
