@@ -19,7 +19,7 @@ services:
     container_name: website
     ports:
       - '3000:3000'
-    image: "3278a8d0efba" # THIS IS TEMPORARY
+    image: "ghcr.io/langaracpsc/langaracpsc-next:latest"
     networks:
       - backend
     labels:
