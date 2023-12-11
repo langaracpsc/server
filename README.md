@@ -53,9 +53,11 @@ All club projects should be hosted on Github.
 As well, Github provides tools to easily build docker images on every pull.
 
 To be written:
-- workflow.yml
+- Github Actions / workflow.yml
 - Watchtower
 - Github packages
+- Self-hosted runners
+
 # Server
 
 To be written:
