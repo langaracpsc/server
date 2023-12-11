@@ -10,7 +10,7 @@
 | [Nginx Proxy Manager](https://nginxproxymanager.com/) | Reverse proxy manager.                    | [nginx.langaracs.tech](https://nginx.langaracs.tech)           | http://168.138.79.49:81   |
 | [Watchtower](https://containrrr.dev/watchtower/)      | Automatically updates docker images       | [watchtower.langaracs.tech](https://watchtower.langaracs.tech) | http://168.138.79.49:8080 |
 | [Plausible](https://plausible.io/)                    | Tracks analytics on our website           | [analytics.langaracs.tech](https://analytics.langaracs.ca)     | http://168.138.79.49:8001 |
-| [Portainer](https://www.portainer.io/)                | Administration tools for docker.          | [portainer.langaracs.tech](https://portainer.langaracs.tech)   | http://168.138.79.49:9443 |
+| [Portainer](https://www.portainer.io/)                | Administration tools for docker.          | [portainer.langaracs.tech](https://portainer.langaracs.tech)   | https://168.138.79.49:9443 |
 
 
 
