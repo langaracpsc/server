@@ -3,7 +3,7 @@
 | Services                                              | Description                               | Domain                                                         | IP                        |
 | ----------------------------------------------------- | ----------------------------------------- | -------------------------------------------------------------- | ------------------------- |
 | Langara API                                           | API for Langara Data.                     | [api2.langaracs.tech](https://api2.langaracs.tech)             | http://168.138.79.49:5000 |
-| Langara Course Browser                                | Langara Course Planner                    | [planner.langaracs.tech](https://planner.langaracs.tech)       | Hosted by Github          |
+| Langara Course Planner                                | Langara Course Planner                    | [planner.langaracs.tech](https://planner.langaracs.tech)       | http://168.138.79.49:5001 |
 | Peregrine                                             | LCSC Discord Bot.                         | N/A                                                            | N/A                       |
 | Website                                               | Our official website.                     | [langaracs.tech](https://langaracs.tech)                       | http://168.138.79.49:3000 |
 | Website API                                           | API for the website (not for public use). | [api.langaracs.tech](https://api.langaracs.tech)               | http://168.138.79.49:8000 |

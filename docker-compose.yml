@@ -59,7 +59,7 @@ services:
 
 
 
-  # Langara Course API from Anderson
+  # Langara Course API
   langara-api:
     container_name: langaraapi
     ports:
@@ -71,6 +71,14 @@ services:
       - course_watcher_db:/database
     environment:
       DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
+
+
+  # Langara Course Planner
+  langara-course-planner:
+    container_name: langara-course-planner
+    ports:
+      - '5001:80'
+    image: 'ghcr.io/langaracpsc/langaracourseplanner:latest'
 
 
   # === SYSADMIN TOOLS === #
