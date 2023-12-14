@@ -125,8 +125,11 @@ services:
       # revive containers with updates
       - WATCHTOWER_INCLUDE_STOPPED=true
       - WATCHTOWER_REVIVE_STOPPED=true
+
       # post updates to logging channel
       - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_LOG_CHANNEL}
+      # but not startup messages
+      - WATCHTOWER_NO_STARTUP_MESSAGE=true
 
       # Use HTTP request to check for an image update
       # curl -H "Authorization: Bearer token" localhost:8080/v1/update
