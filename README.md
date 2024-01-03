@@ -2,19 +2,19 @@
 
 | Docker Services                                       | Description                               | Domain                                                         | IP                        |
 | ----------------------------------------------------- | ----------------------------------------- | -------------------------------------------------------------- | ------------------------- |
-| Langara API                                           | API for Langara Data.                     | [api2.langaracs.tech](https://api2.langaracs.tech)             | http://168.138.79.49:5000 |
-| [Langara Course Planner](https://github.com/langaracpsc/LangaraCoursePlanner)                                | Langara Course Planner                    | [planner.langaracs.tech](https://planner.langaracs.tech)       | http://168.138.79.49:5001 |
-| [Peregrine](https://github.com/langaracpsc/peregrine)            | N/A                       |
+| [Langara API](https://github.com/langaracpsc/LangaraCourseWatcher)              | API for Langara Data.      | [api2.langaracs.tech](https://api2.langaracs.tech)             | http://168.138.79.49:5000 |
+| [Langara Course Planner](https://github.com/langaracpsc/LangaraCoursePlanner)   | Langara Course Planner     | [planner.langaracs.tech](https://planner.langaracs.tech)       | http://168.138.79.49:5001 |
+| [Peregrine](https://github.com/langaracpsc/peregrine)            | LCSC Discord Bot.                         | N/A
 | [Website](https://github.com/langaracpsc/langaracpsc-next)       | Our official website.                     | [langaracs.tech](https://langaracs.tech)                       | http://168.138.79.49:3000 |
 | [Website API](https://github.com/langaracpsc/LangaraCPSC.WebAPI) | API for the website (not for public use). | [api.langaracs.tech](https://api.langaracs.tech)               | http://168.138.79.49:8000 |
 | [Nginx Proxy Manager](https://nginxproxymanager.com/)            | Reverse proxy manager.                    | [nginx.langaracs.tech](https://nginx.langaracs.tech)           | http://168.138.79.49:81   |
-| [Watchtower](https://containrrr.dev/watchtower/)                 | Automatically updates docker images.       | [watchtower.langaracs.tech](https://watchtower.langaracs.tech)| http://168.138.79.49:8080 |
-| [Plausible](https://plausible.io/)                               | Tracks analytics on our website.           | [plausible.langaracs.tech](https://plausible.langaracs.tech)  | http://168.138.79.49:8001 |
+| [Watchtower](https://containrrr.dev/watchtower/)                 | Automatically updates docker images.      | [watchtower.langaracs.tech](https://watchtower.langaracs.tech) | http://168.138.79.49:8080 |
+| [Plausible](https://plausible.io/)                               | Tracks analytics on our website.          | [plausible.langaracs.tech](https://plausible.langaracs.tech)   | http://168.138.79.49:8001 |
 | [Portainer](https://www.portainer.io/)                           | Administration tools for docker.          | [portainer.langaracs.tech](https://portainer.langaracs.tech)   | https://168.138.79.49:9443 |
 
-| Other Services | Description                       |
+| Other Services      | Description                       |
 | --------------------| --------------------------------- |
-| [Docker](https://www.docker.com/)              | Manages all of our microservices. |
+| [Docker](https://www.docker.com/) | Manages all of our microservices. |
 | [Github Runner](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners) | Self-hosted runner for github.
 
 
@@ -24,7 +24,7 @@ Welcome to the Langara Computer Science Server Systems and Infrastructure Handbo
 
 This document covers all of our infrastructure and services.
 
-This handbook is divided into **7 sections**:
+This handbook is divided into **6 sections**:
 
 0) Design Philosophy
 1) Docker and Microservices
