@@ -22,9 +22,7 @@ services:
     image: "ghcr.io/langaracpsc/langaracpsc-next:latest"
     networks:
       - backend
-    labels:
-      - "com.centurylinklabs.watchtower.enable=false" # disable watchtower on this container
-
+   
 
   # Website API
   langaracpsc.webapi:
@@ -42,7 +40,6 @@ services:
       - USERNAME=${PG_USERNAME}
       - PASSWORD=${PG_PASSWORD}
       - PORT=${PG_PORT}
-
 
   # Postgres database that backs langaracpsc.webapi
   postgres_image:
