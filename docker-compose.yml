@@ -13,7 +13,6 @@ services:
       - WATCHTOWER_HTTP_API_TOKEN
 
 
-
   # Website
   langaracpsc-next:
     container_name: website
@@ -31,16 +30,18 @@ services:
     depends_on:
       - "postgres_image"
     ports:
-      - "8000:80"
+      - "8000:8080"
     networks:
       - backend
+    env_file:
+      - .env
     environment:
       - HOSTNAME=${PG_HOSTNAME}
       - DATABASE=${PG_DATABASE}
       - USERNAME=${PG_USERNAME}
       - PASSWORD=${PG_PASSWORD}
       - PORT=${PG_PORT}
-
+      - CAL_ID=${CAL_ID}
   # Postgres database that backs langaracpsc.webapi
   postgres_image:
     container_name: postgres
