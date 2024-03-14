@@ -147,6 +147,38 @@ services:
       - WATCHTOWER_POLL_INTERVAL=3600
       - WATCHTOWER_HTTP_API_PERIODIC_POLLS=true
 
+  # testing databse gui
+  directus:
+    container_name: directus
+    image: directus/directus:10.10.4
+    depends_on:
+      - "postgres_image"
+    ports:
+      - 8055:8055
+    volumes:
+      - ./database:/data/directus/database
+      - ./uploads:/data/directus/uploads
+      - ./extensions:/data/directus/extensions
+    networks:
+      - backend
+    environment:
+      KEY: ${DIRECTUS_KEY}
+      SECRET: ${DIRECTUS_SECRET}
+      ADMIN_EMAIL: "langaracompsciclub@gmail.com"
+      ADMIN_PASSWORD: ${DIRECTUS_PASSWORD}
+      WEBSOCKETS_ENABLED: "true"
+
+      #PUBLIC_URL: "directus.langaracs.tech"
+
+      DB_CLIENT: "pg"
+      DB_HOST: ${PG_HOSTNAME}
+      DB_PORT: ${PG_PORT}
+      DB_DATABASE: ${PG_DATABASE}
+      DB_USER: ${PG_USERNAME}
+      DB_PASSWORD: ${PG_PASSWORD}
+
+      
+
 
 networks:
   backend:
