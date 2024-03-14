@@ -19,3 +19,10 @@ PG_DATABASE="postgres"
 PG_USERNAME="postgres"
 PG_DATABASE="password"
 PG_PORT="5432"
+
+
+
+# Directus
+DIRECTUS_KEY=random_string_here
+DIRECTUS_SECRET=random_string_here
+DIRECTUS_PASSWORD="default password for directus"
