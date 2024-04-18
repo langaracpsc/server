@@ -44,6 +44,7 @@ services:
       - PASSWORD=${PG_PASSWORD}
       - PORT=${PG_PORT}
       - CAL_ID=${CAL_ID}
+
   # Postgres database that backs langaracpsc.webapi
   postgres_image:
     container_name: postgres
@@ -53,10 +54,23 @@ services:
       - backend
     volumes:
       - postgres_db:/var/lib/postgres/data
+      - ./data/db:/var/lib/postgres/db
     environment:
       - POSTGRES_PASSWORD=${PG_PASSWORD}
       - POSTGRES_USER=${PG_USERNAME}
 
+  # notion api
+  notion-web-api:
+    container_name: notion-web-api
+    ports:
+      - '3500:5000'
+    image: "ghcr.io/langaracpsc/notion-web-api:latest"
+    networks:
+      - backend
+    volumes:
+      - "./data/notion-web-api:/data"
+    environment:
+      NOTION_API_TOKEN: ${NOTION_API_TOKEN}
 
   # Langara Course API
   langara-api:
