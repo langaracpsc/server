@@ -1,5 +1,5 @@
 *.env
-
-
+keyfile.json
+ExecImages/
 rish_this_is_prod/
 data/
