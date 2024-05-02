@@ -90,7 +90,7 @@ services:
   langara-course-planner:
     container_name: langara-course-planner
     ports:
-      - '5001:80'
+      - '5001:5000'
     image: 'ghcr.io/langaracpsc/langaracourseplanner:latest'
 
 
