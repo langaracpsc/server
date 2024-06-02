@@ -73,18 +73,33 @@ services:
       NOTION_API_TOKEN: ${NOTION_API_TOKEN}
 
   # Langara Course API
-  langara-api:
-    container_name: langaraapi
+  # PINNED TO LAST COMMIT OF LEGACY VERSION 
+  # DO NOT UPDATE UNTIL DEPENDENCIES ARE
+  langara-api-legacy:
+    container_name: langaraapi-legacy
     ports:
       - '5000:5000'
-    image: "ghcr.io/langaracpsc/langaracoursewatcher:latest"
+    image: "ghcr.io/langaracpsc/langaracoursewatcher@sha256:935111ab3b22926a4bbc99b67c440f84e96b537090862493eb4b6e0a45ece066"
     networks:
       - backend
     volumes:
       - course_watcher_db:/database
     environment:
       DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
+      # DEBUG_MODE: true
 
+  langara-api:
+    container_name: langaraapi
+    ports:
+      - '5003:5000'
+    image: "ghcr.io/langaracpsc/langaracoursewatcher:latest"
+    networks:
+      - backend
+    volumes:
+      - course_watcher_db_new:/database
+    # environment:
+    #   DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
+    #   # DEBUG_MODE: true
 
   # Langara Course Planner
   langara-course-planner:
@@ -171,6 +186,7 @@ volumes:
   postgres_db:
 
   course_watcher_db:
+  course_watcher_db_new:
 
   portainer_data:
 
