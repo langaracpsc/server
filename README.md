@@ -2,15 +2,15 @@
 
 | Docker Services                                       | Description                               | Domain                                                         | IP                        |
 | ----------------------------------------------------- | ----------------------------------------- | -------------------------------------------------------------- | ------------------------- |
-| [Langara API](https://github.com/langaracpsc/LangaraCourseWatcher)              | API for Langara Data.      | [api2.langaracs.tech](https://api2.langaracs.tech)             | http://168.138.79.49:5000 |
-| [Langara Course Planner](https://github.com/langaracpsc/LangaraCoursePlanner)   | Langara Course Planner     | [planner.langaracs.tech](https://planner.langaracs.tech)       | http://168.138.79.49:5001 |
+| [Langara API](https://github.com/langaracpsc/LangaraCourseWatcher)              | API for Langara Data.      | [api2.langaracs.ca](https://api2.langaracs.ca)             | http://168.138.79.49:5000 |
+| [Langara Course Planner](https://github.com/langaracpsc/LangaraCoursePlanner)   | Langara Course Planner     | [planner.langaracs.ca](https://planner.langaracs.ca)       | http://168.138.79.49:5001 |
 | [Peregrine](https://github.com/langaracpsc/peregrine)            | LCSC Discord Bot.                         | N/A
-| [Website](https://github.com/langaracpsc/langaracpsc-next)       | Our official website.                     | [langaracs.tech](https://langaracs.tech)                       | http://168.138.79.49:3000 |
-| [Website API](https://github.com/langaracpsc/LangaraCPSC.WebAPI) | API for the website (not for public use). | [api.langaracs.tech](https://api.langaracs.tech)               | http://168.138.79.49:8000 |
-| [Nginx Proxy Manager](https://nginxproxymanager.com/)            | Reverse proxy manager.                    | [nginx.langaracs.tech](https://nginx.langaracs.tech)           | http://168.138.79.49:81   |
-| [Watchtower](https://containrrr.dev/watchtower/)                 | Automatically updates docker images.      | [watchtower.langaracs.tech](https://watchtower.langaracs.tech) | http://168.138.79.49:8080 |
-| [Plausible](https://plausible.io/)                               | Tracks analytics on our website.          | [plausible.langaracs.tech](https://plausible.langaracs.tech)   | http://168.138.79.49:8001 |
-| [Portainer](https://www.portainer.io/)                           | Administration tools for docker.          | [portainer.langaracs.tech](https://portainer.langaracs.tech)   | https://168.138.79.49:9443 |
+| [Website](https://github.com/langaracpsc/langaracpsc-next)       | Our official website.                     | [langaracs.ca](https://langaracs.ca)                       | http://168.138.79.49:3000 |
+| [Website API](https://github.com/langaracpsc/LangaraCPSC.WebAPI) | API for the website (not for public use). | [api.langaracs.ca](https://api.langaracs.ca)               | http://168.138.79.49:8000 |
+| [Nginx Proxy Manager](https://nginxproxymanager.com/)            | Reverse proxy manager.                    | [nginx.langaracs.ca](https://nginx.langaracs.ca)           | http://168.138.79.49:81   |
+| [Watchtower](https://containrrr.dev/watchtower/)                 | Automatically updates docker images.      | [watchtower.langaracs.ca](https://watchtower.langaracs.ca) | http://168.138.79.49:8080 |
+| [Plausible](https://plausible.io/)                               | Tracks analytics on our website.          | [plausible.langaracs.ca](https://plausible.langaracs.ca)   | http://168.138.79.49:8001 |
+| [Portainer](https://www.portainer.io/)                           | Administration tools for docker.          | [portainer.langaracs.ca](https://portainer.langaracs.ca)   | https://168.138.79.49:9443 |
 
 | Other Services      | Description                       |
 | --------------------| --------------------------------- |
@@ -90,8 +90,6 @@ SSH keys are shared to club technical leads during orientation.
 
 
 ## Domain and Nginx
-
-Currently, all services run on `langaracs.tech`. This domain will expire on June 18, 2024, at which point we would like to migrate to a `.org` or `.ca` domain.
 
 After acquiring a domain, make sure that the proper DNS records are set up. This includes:
 - A records for hosting subdomains. 
