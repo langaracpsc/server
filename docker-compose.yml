@@ -21,29 +21,39 @@ services:
     image: "ghcr.io/langaracpsc/langaracpsc-next:latest"
     networks:
       - backend
+
+  # Hackathon Website
+  lhacks2024:
+    container_name: lhacks-website
+    ports:
+      - '5500:3000'
+    image: "ghcr.io/langaracpsc/lhacks2024:latest"
+    networks:
+      - backend
    
 
   # Website API
-  langaracpsc.webapi:
-    container_name: webapi
-    image: "ghcr.io/langaracpsc/langaracpsc.webapi:latest"
-    depends_on:
-      - "postgres_image"
-    ports:
-      - "8000:8080"
-    networks:
-      - backend
-    env_file:
-      - .env
-    volumes:
-      - ./ExecImages:/app/Images
-    environment:
-      - HOSTNAME=${PG_HOSTNAME}
-      - DATABASE=${PG_DATABASE}
-      - USERNAME=${PG_USERNAME}
-      - PASSWORD=${PG_PASSWORD}
-      - PORT=${PG_PORT}
-      - CAL_ID=${CAL_ID}
+  # THIS IS BROKEN DUE TO CORS
+  # langaracpsc.webapi:
+  #   container_name: webapi
+  #   image: "ghcr.io/langaracpsc/langaracpsc.webapi:latest"
+  #   depends_on:
+  #     - "postgres_image"
+  #   ports:
+  #     - "8000:8080"
+  #   networks:
+  #     - backend
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - ./ExecImages:/app/Images
+  #   environment:
+  #     - HOSTNAME=${PG_HOSTNAME}
+  #     - DATABASE=${PG_DATABASE}
+  #     - USERNAME=${PG_USERNAME}
+  #     - PASSWORD=${PG_PASSWORD}
+  #     - PORT=${PG_PORT}
+  #     - CAL_ID=${CAL_ID}
 
   # Postgres database that backs langaracpsc.webapi
   postgres_image:
@@ -87,20 +97,23 @@ services:
     environment:
       DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
       # DEBUG_MODE: true
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
 
   langara-api:
     container_name: langaraapi
     ports:
-      - '5003:5000'
+      - '5002:5000'
     image: "ghcr.io/langaracpsc/langaracoursewatcher:latest"
     networks:
       - backend
     volumes:
-      - course_watcher_db_new:/database
-    # environment:
-    #   DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
-    #   # DEBUG_MODE: true
+      - "./data/langara-api:/database"
+    environment:
+      API_KEY: ${COURSES_API_KEY}
+      PYTHONUNBUFFERED: 1
 
+    
   # Langara Course Planner
   langara-course-planner:
     container_name: langara-course-planner
@@ -186,7 +199,6 @@ volumes:
   postgres_db:
 
   course_watcher_db:
-  course_watcher_db_new:
 
   portainer_data:
 
