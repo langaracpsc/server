@@ -1,0 +1,10 @@
+# https://plausible.io/docs/self-hosting-configuration
+BASE_URL=https://plausible.langaracs.ca
+SECRET_KEY_BASE=KEY HERE
+TOTP_VAULT_KEY=KEY HERE
+
+DISABLE_REGISTRATION=true
+LOG_FAILED_LOGIN_ATTEMPTS=true
+
+MAXMIND_LICENSE_KEY=KEY HERE
+MAXMIND_EDITION=GeoLite2-City
