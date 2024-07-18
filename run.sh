@@ -15,6 +15,12 @@ docker compose pull
 docker compose up -d
 cd ..
 
+# start findblahaj
+cd secret/
+docker compose pull
+docker compose up -d
+cd ..
+
 
 # follow main logs
 docker compose logs -f
