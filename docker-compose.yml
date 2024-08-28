@@ -17,7 +17,7 @@ services:
   langaracpsc-next:
     container_name: website
     ports:
-      - '3000:3000'
+      - '3200:3000'
     image: "ghcr.io/langaracpsc/langaracpsc-next:latest"
     networks:
       - backend
@@ -103,7 +103,7 @@ services:
   langara-api:
     container_name: langara-api
     ports:
-      - '5002:5000'
+      - '5010:5000'
     image: "ghcr.io/langaracpsc/langaracoursewatcher:latest"
     networks:
       - backend
@@ -120,7 +120,7 @@ services:
     depends_on:
       - "langara-api"
     ports:
-      - '5001:5000'
+      - '5002:5000'
     image: 'ghcr.io/langaracpsc/langaracourseplanner:latest'
 
 
