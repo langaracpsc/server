@@ -101,7 +101,7 @@ services:
       - "com.centurylinklabs.watchtower.enable=false"
 
   langara-api:
-    container_name: langaraapi
+    container_name: langara-api
     ports:
       - '5002:5000'
     image: "ghcr.io/langaracpsc/langaracoursewatcher:latest"
@@ -117,6 +117,8 @@ services:
   # Langara Course Planner
   langara-course-planner:
     container_name: langara-course-planner
+    depends_on:
+      - "langara-api"
     ports:
       - '5001:5000'
     image: 'ghcr.io/langaracpsc/langaracourseplanner:latest'
