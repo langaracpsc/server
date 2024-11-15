@@ -87,11 +87,11 @@ services:
   # DO NOT UPDATE UNTIL DEPENDENCIES ARE
   langara-api-legacy:
     container_name: langaraapi-legacy
-    ports:
-      - '5000:5000'
+    # ports:
+    #   - '5000:5000'
     image: "ghcr.io/langaracpsc/langaracoursewatcher@sha256:935111ab3b22926a4bbc99b67c440f84e96b537090862493eb4b6e0a45ece066"
-    networks:
-      - backend
+    # networks:
+    #   - backend
     volumes:
       - course_watcher_db:/database
     environment:
@@ -100,29 +100,44 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
 
-  langara-api:
-    container_name: langara-api
+  langara-watcher-api:
+    container_name: langara-watcher-api
     ports:
-      - '5010:5000'
-    image: "ghcr.io/langaracpsc/langaracoursewatcher:latest"
+      - '5010:8000'
+    image: "ghcr.io/langaracpsc/langaracoursewatcher-api:latest"
     networks:
       - backend
     volumes:
       - "./data/langara-api:/database"
-    environment:
-      API_KEY: ${COURSES_API_KEY}
-      PYTHONUNBUFFERED: 1
+    # environment:
+    #   API_KEY: ${COURSES_API_KEY}
+    #   PYTHONUNBUFFERED: 1
 
-    
+  langara-watcher-backend:
+    container_name: langara-watcher-backend
+    ports:
+      - '8000:8000'
+    image: "ghcr.io/langaracpsc/langaracoursewatcher-backend:latest"
+    networks:
+      - backend
+    volumes:
+      - ./data/langara-api:/database
+  
   # Langara Course Planner
   langara-course-planner:
     container_name: langara-course-planner
     depends_on:
-      - "langara-api"
+      - "langara-watcher-api"
     ports:
       - '5002:5000'
     image: 'ghcr.io/langaracpsc/langaracourseplanner:latest'
+  
 
+  lcsc-links:
+    container_name: lcsc-links
+    ports:
+      - '5020:5000'
+    image: 'ghcr.io/langaracpsc/links:latest'
 
   # === SYSADMIN TOOLS === #
 
