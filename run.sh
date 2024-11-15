@@ -15,12 +15,6 @@ docker compose pull
 docker compose up -d
 cd ..
 
-# start findblahaj
-cd secret/
-docker compose pull
-docker compose up -d
-cd ..
-
 #start hackathon portal
 cd lhacks-portal
 

@@ -7,10 +7,6 @@ cd plausible/
 docker compose stop
 cd ..
 
-# start findblahaj
-cd secret/
-docker compose stop
-cd ..
 
 #start hackathon portal
 cd lhacks-portal
