@@ -71,7 +71,9 @@ services:
 
   # notion api
   notion-web-api-backend:
+    container_name: notion-web-api-backend
     image: "ghcr.io/langaracpsc/notion-web-api-backend:latest"
+    restart: "on-failure:3"
     volumes:
       - "./data/notion-web-api:/data"
     environment:
@@ -80,6 +82,7 @@ services:
 
 
   notion-web-api-fastapi:
+    container_name: notion-web-api-fastapi
     depends_on:
       - notion-web-api-backend
     ports:

@@ -28,8 +28,6 @@ docker compose pull
 docker compose up -d
 cd ..
 
-cd ..
-
 
 # follow main logs
 docker compose logs -f
