@@ -16,17 +16,18 @@ docker compose up -d
 cd ..
 
 #start hackathon portal
-cd lhacks-portal
+# commented out for now, unsure if its causing server issues
+# cd lhacks-portal
 
-cd backend
-docker compose pull
-docker compose up -d
-cd ..
+# cd backend
+# docker compose pull
+# docker compose up -d
+# cd ..
 
-cd frontend
-docker compose pull
-docker compose up -d
-cd ..
+# cd frontend
+# docker compose pull
+# docker compose up -d
+# cd ..
 
 
 # follow main logs
