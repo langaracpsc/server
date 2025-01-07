@@ -9,12 +9,12 @@ cd ..
 
 
 #start hackathon portal
-cd lhacks-portal
+# cd lhacks-portal
 
-cd backend
-docker compose stop
-cd ..
+# cd backend
+# docker compose stop
+# cd ..
 
-cd frontend
-docker compose stop
-cd ..
+# cd frontend
+# docker compose stop
+# cd ..
