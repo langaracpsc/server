@@ -205,7 +205,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
 
-
+  # 2025-01-14
+  # TEMPORARILY DISABLED TO DIAGNOSE IF IT IS CAUSING OUR DOCKER CONTAINERS TO CRASH.
 
   # Watchtower keeps images up to date
   # watchtower:

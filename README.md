@@ -1,4 +1,15 @@
+# LCSC Server
+
+**tl;dr : What is this repository?**
+
+This is where all of the services for the LCSC are deployed. In short, we have many projects that we want to put on the internet, but our budget and resources are extremely constrained. Docker is a piece of software that lets us run many projects on a single server in a programatic and extensible way. This lets us host many services (e.g. our website, course planner, discord bot, analytics, and more) on a single low-cost server. 
+
+See below for more details, and do not hesitate to ask Anderson or Rishit for more information.
+
+
 # Services
+
+***OUTDATED, see docker-compose.yml for current services***
 
 | Docker Services                                       | Description                               | Domain                                                         | IP                        |
 | ----------------------------------------------------- | ----------------------------------------- | -------------------------------------------------------------- | ------------------------- |
