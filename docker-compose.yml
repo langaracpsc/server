@@ -209,38 +209,38 @@ services:
   # TEMPORARILY DISABLED TO DIAGNOSE IF IT IS CAUSING OUR DOCKER CONTAINERS TO CRASH.
 
   # Watchtower keeps images up to date
-  # watchtower:
-  #   container_name: watchtower
-  #   image: containrrr/watchtower
-  #   ports:
-  #     - '8080:8080'
-  #   restart: unless-stopped
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   networks:
-  #     - backend
-  #   environment:
-  #     # set timezone
-  #     - TZ=America/Vancouver 
-  #     # delete old containers
-  #     - WATCHTOWER_CLEANUP=true
-  #     # revive containers with updates
-  #     - WATCHTOWER_INCLUDE_STOPPED=true
-  #     - WATCHTOWER_REVIVE_STOPPED=true
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    ports:
+      - '8080:8080'
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - backend
+    environment:
+      # set timezone
+      - TZ=America/Vancouver 
+      # delete old containers
+      - WATCHTOWER_CLEANUP=true
+      # revive containers with updates
+      - WATCHTOWER_INCLUDE_STOPPED=true
+      - WATCHTOWER_REVIVE_STOPPED=true
 
-  #     # post updates to logging channel
-  #     - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_LOG_CHANNEL}
-  #     # but not startup messages
-  #     - WATCHTOWER_NO_STARTUP_MESSAGE=true
+      # post updates to logging channel
+      - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_LOG_CHANNEL}
+      # but not startup messages
+      - WATCHTOWER_NO_STARTUP_MESSAGE=true
 
-  #     # Use HTTP request to check for an image update
-  #     # curl -H "Authorization: Bearer token" localhost:8080/v1/update
-  #     - WATCHTOWER_HTTP_API_UPDATE=true
-  #     # Set token for HTTP request from .env
-  #     - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_HTTP_API_TOKEN}
-  #     # Also continue checking for updates automatically (every hour)
-  #     - WATCHTOWER_POLL_INTERVAL=3600
-  #     - WATCHTOWER_HTTP_API_PERIODIC_POLLS=true
+      # Use HTTP request to check for an image update
+      # curl -H "Authorization: Bearer token" localhost:8080/v1/update
+      - WATCHTOWER_HTTP_API_UPDATE=true
+      # Set token for HTTP request from .env
+      - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_HTTP_API_TOKEN}
+      # Also continue checking for updates automatically (every hour)
+      - WATCHTOWER_POLL_INTERVAL=3600
+      - WATCHTOWER_HTTP_API_PERIODIC_POLLS=true
 
 
 
