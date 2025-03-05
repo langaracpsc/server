@@ -167,7 +167,7 @@ services:
     container_name: coursys
     ports:
       - '5030:3000'
-    image: 'ghcr.io/langaracpsc/coursys:latest'
+    image: 'ghcr.io/highfire1/langaracourseplanner:latest'
     restart: unless-stopped
 
   # homarr
