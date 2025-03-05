@@ -2,6 +2,8 @@
 
 This repository contains the infrastructure and deployment configuration for the Langara Computer Science Club's (LCSC) services. Our infrastructure uses Docker to efficiently run multiple services on a single server, making it cost-effective and maintainable.
 
+> 📚 **Detailed Service Documentation**: For comprehensive information about each service, including ports, images, and documentation links, see [SERVICES.md](SERVICES.md).
+
 ## Current Services
 
 | Service | Description | Port | Domain | Status |
