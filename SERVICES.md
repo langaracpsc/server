@@ -60,7 +60,7 @@ This document provides detailed information about each service running in our in
 - **Port**: 7575
 - **Image**: `ghcr.io/ajnart/homarr:latest`
 - **Description**: Service dashboard
-- **Documentation**: [Homarr Documentation](https://homarr.dev/docs)
+- **Documentation**: [Homarr Documentation](https://homarr.dev/docs/)
 
 ## Infrastructure Services
 
